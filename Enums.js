@@ -89,7 +89,12 @@ const ALL_ENUMS = {
     }
 };
 
-// Applies the enums as properties of the target object
+/**
+ * Applies the enums as properties of the target object
+ *
+ * @param {Object} target
+ * @returns {Undefined}
+ */
 export function applyEnums (target) {
     for (let key in ALL_ENUMS) {
         target[key] = ALL_ENUMS[key];

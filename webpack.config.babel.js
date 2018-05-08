@@ -1,8 +1,7 @@
-/* globals require */
+
 import webpack from 'webpack';
 import { resolve } from 'path';
-
-var BuildNumber = require('./DevUtils/BuildNumber.js');
+import * as BuildNumber from './DevUtils/BuildNumber';
 
 // Try to get the build number we should use
 try {
@@ -10,7 +9,7 @@ try {
 } catch (e) {
     console.error('Could not parse build number :(');
     console.error(e.toString());
-    // return;
+    // return; // syntax error return outside a function
 }
 
 export default {
@@ -21,7 +20,6 @@ export default {
         filename: 'bundle.js'
     },
     plugins: [
-        // new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin({
             'BUILD_NUMBER': JSON.stringify(buildNum)
         }),

@@ -11,6 +11,18 @@
         "no-unused-vars": ["error", { "args": "after-used" }],
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "semi": ["error", "always"],
-        "padded-blocks": 0
+        "padded-blocks": 0,
+        "valid-jsdoc": ["error", {
+                "requireParamDescription": false,
+                "requireReturnDescription": false
+            }],
+        "require-jsdoc": ["error", {
+                "require": {
+                    "FunctionDeclaration": true,
+                    "MethodDefinition": true,
+                    "ClassDeclaration": true,
+                    "ArrowFunctionExpression": false
+                }
+            }]
     }
 }
