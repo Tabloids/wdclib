@@ -1,11 +1,13 @@
-/* globals require */
+/* globals require, qt */
 
 import { copyFunctions } from './Utilities';
 import Shared from './Shared';
 import NativeDispatcher from './NativeDispatcher';
 import SimulatorDispatcher from './SimulatorDispatcher';
-// import { version as BUILD_NUMBER } from './package.json';
+import { getBuildNumber } from './DevUtils/BuildNumber';
+
 let qwebchannel = require('qwebchannel');
+const BUILD_NUMBER = getBuildNumber();
 
 /**
  * ShimLibrary - This module defines the WDC's shim library
@@ -25,6 +27,15 @@ function bootstrappingFinished (_dispatcher, _shared) {
     copyFunctions(_dispatcher.publicInterface, window.tableau);
     copyFunctions(_dispatcher.privateInterface, window._tableau);
     _shared.init();
+}
+
+/**
+ * Check to see if the tableauVersionBootstrap is defined as a global object. If so,
+ * we are running in the Tableau desktop/server context. If not, we're running in the simulator
+ * @returns {Boolean}
+ */
+function runningOnTableau () {
+    return !!window.tableauVersionBootstrap;
 }
 
 /**
@@ -48,14 +59,14 @@ export function init () {
     // Always define the private _tableau object at the start
     window._tableau = {};
 
-    console.log(`Initializing version number ${BUILD_NUMBER}`);
+    console.log(`Initializing tableauwdc version number ${BUILD_NUMBER}`);
 
     /**
      * Check to see if the tableauVersionBootstrap is defined as a global object. If so,
      * we are running in the Tableau desktop/server context. If not, we're running in the simulator
      */
-    if (!!window.tableauVersionBootstrap) {
-
+    if (runningOnTableau()) {
+        // Running on Tableau
         // We have the tableau object defined
         console.log(`Initializing NativeDispatcher, Reporting version number`);
 
@@ -64,7 +75,7 @@ export function init () {
         dispatcher = new NativeDispatcher(window);
 
     } else if (!!window.qt && !!window.qt.webChannelTransport) {
-
+        // qwebchannel
         console.log('Initializing NativeDispatcher for qwebchannel');
 
         window.tableau = {};
@@ -97,8 +108,8 @@ export function init () {
         });
 
     } else {
-
-        console.log('Version Bootstrap is not defined, Initializing SimulatorDispatcher ################');
+        // Running on Simulator
+        console.log('Version Bootstrap is not defined, Initializing SimulatorDispatcher');
 
         window.tableau = {};
 
@@ -117,3 +128,5 @@ export function init () {
         bootstrappingFinished(dispatcher, shared);
     }
 }
+
+export default init;

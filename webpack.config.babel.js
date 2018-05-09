@@ -1,16 +1,13 @@
 
-import webpack from 'webpack';
+// import webpack from 'webpack';
 import { resolve } from 'path';
-import * as BuildNumber from './DevUtils/BuildNumber';
+import { getBuildNumber } from './DevUtils/BuildNumber';
 
-// Try to get the build number we should use
-try {
-    var buildNum = BuildNumber.getBuildNumber().toString();
-} catch (e) {
-    console.error('Could not parse build number :(');
-    console.error(e.toString());
-    // return; // syntax error return outside a function
-}
+const BUILD_NUMBER = getBuildNumber({ showLog: true });
+
+// const [MAYOR, MINOR, PATCH, ...rest] = BUILD_NUMBER.split('.');
+
+console.log(`Building Version: ${BUILD_NUMBER}`);
 
 export default {
     devtool: 'cheap-module-inline-source-map',
@@ -18,11 +15,5 @@ export default {
     output: {
         path: resolve('dist'),
         filename: 'bundle.js'
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'BUILD_NUMBER': JSON.stringify(buildNum)
-        }),
-        new webpack.BannerPlugin('Build Number: ' + buildNum)
-    ]
+    }
 };

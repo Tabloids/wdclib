@@ -1,9 +1,20 @@
 /* globals require */
 import * as ApprovedOrigins from './ApprovedOrigins';
-// import { version as BUILD_NUMBER } from './package.json';
+import { getBuildNumber } from './DevUtils/BuildNumber';
+
+import deStringsMap from './resources/Shim_lib_resources_de-DE.json';
+import enStringsMap from './resources/Shim_lib_resources_en-US.json';
+import esStringsMap from './resources/Shim_lib_resources_es-ES.json';
+import jaStringsMap from './resources/Shim_lib_resources_ja-JP.json';
+import frStringsMap from './resources/Shim_lib_resources_fr-FR.json';
+import koStringsMap from './resources/Shim_lib_resources_ko-KR.json';
+import ptStringsMap from './resources/Shim_lib_resources_pt-BR.json';
+import zhStringsMap from './resources/Shim_lib_resources_zh-CN.json';
 
 // Required for IE & Edge which don't support endsWith
 require('String.prototype.endsWith'); // @todo review this
+
+const BUILD_NUMBER = getBuildNumber();
 
 /**
  * Used for communicating between the simulator and web data connector. It does
@@ -125,6 +136,7 @@ class SimulatorDispatcher {
         let messagePayload = this._buildMessagePayload(msgName, msgData, this._packagePropertyValues());
 
         // Check first to see if we have a messageHandler defined to post the message to
+        // ( will use destructuring asap to validate this - Jax)
         if (typeof this.globalObj.webkit != 'undefined' &&
             typeof this.globalObj.webkit.messageHandlers != 'undefined' &&
             typeof this.globalObj.webkit.messageHandlers.wdcHandler != 'undefined') {
@@ -233,15 +245,16 @@ class SimulatorDispatcher {
         let locale = this._getCurrentLocale();
 
         // Use static require here, otherwise webpack would generate a much bigger JS file
-        // (misa don't like [JAX])
-        let deStringsMap = require('json-loader!./resources/Shim_lib_resources_de-DE.json');
-        let enStringsMap = require('json-loader!./resources/Shim_lib_resources_en-US.json');
-        let esStringsMap = require('json-loader!./resources/Shim_lib_resources_es-ES.json');
-        let jaStringsMap = require('json-loader!./resources/Shim_lib_resources_ja-JP.json');
-        let frStringsMap = require('json-loader!./resources/Shim_lib_resources_fr-FR.json');
-        let koStringsMap = require('json-loader!./resources/Shim_lib_resources_ko-KR.json');
-        let ptStringsMap = require('json-loader!./resources/Shim_lib_resources_pt-BR.json');
-        let zhStringsMap = require('json-loader!./resources/Shim_lib_resources_zh-CN.json');
+        // ( the increment in size is irrelevant, specially when minimized, moving to the top and import [JAX])
+
+        // let deStringsMap = require('json-loader!./resources/Shim_lib_resources_de-DE.json');
+        // let enStringsMap = require('json-loader!./resources/Shim_lib_resources_en-US.json');
+        // let esStringsMap = require('json-loader!./resources/Shim_lib_resources_es-ES.json');
+        // let jaStringsMap = require('json-loader!./resources/Shim_lib_resources_ja-JP.json');
+        // let frStringsMap = require('json-loader!./resources/Shim_lib_resources_fr-FR.json');
+        // let koStringsMap = require('json-loader!./resources/Shim_lib_resources_ko-KR.json');
+        // let ptStringsMap = require('json-loader!./resources/Shim_lib_resources_pt-BR.json');
+        // let zhStringsMap = require('json-loader!./resources/Shim_lib_resources_zh-CN.json');
 
         let stringJsonMapByLocale = {
             'de': deStringsMap,

@@ -1,9 +1,8 @@
-/* globals process */
 import { version as BUILD_NUMBER } from '../package.json';
 export let WDC_LIB_PREFIX = 'tableauwdc-';
 
 /**
- * Where is this used? couldn't find anywhere
+ * Where is this class used? couldn't find anywhere
  */
 export class VersionNumber {
     /**
@@ -57,22 +56,20 @@ export class VersionNumber {
 }
 
 /**
+ *
+ * @param {Object} config
  * @returns {String}
  */
-export function getBuildNumber () {
-    // Grab the version number from the package json property ( one source of truth )
-    let versionNumber = BUILD_NUMBER;
+export function getBuildNumber ({ showLog = false } = {}) {
+    // Grab the version number from the package json property ( one static source of truth )
 
-    if (versionNumber) {
-
-        console.log(`Found versionNumber in package.json: ${versionNumber}`);
-
-    } else {
-        // why? I'd strongly suggest to have only 1 source of truth for versioning, which is the package.json
-        versionNumber = process.argv.versionNumber;
-        console.log(`Found versionNumber in argument: ${versionNumber}`);
-
+    if (!BUILD_NUMBER) {
+        throw new Error(`Unable to retrieve version number from package.json`);
     }
 
-    return versionNumber;
+    if (showLog) {
+        console.log(`Found versionNumber in package.json: ${BUILD_NUMBER}`);
+    }
+
+    return BUILD_NUMBER;
 }
