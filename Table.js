@@ -6,20 +6,20 @@ class Table {
     /**
      * Represents a single table which Tableau has requeste
      *
-     * @param {Object} tableInfo - Information about the table which has been requested.
+     * @param {Object} tableInfo Information about the table which has been requested.
      * This is guaranteed to be one of the tables the connector returned in the call to getSchema.
      *
-     * @param {string=} incrementValue - Defines the incremental update value for this table.
+     * @param {string=} incrementValue Defines the incremental update value for this table.
      * Empty string if there is not an incremental update requested.
      *
-     * @param {Boolean} isJoinFiltered - Whether or not this table is meant to be filtered using filterValues.
-     * @param {String} filterColumnId - If this table is filtered, this is the column where the filter values should be found.
-     * @param {Array} filterValues - An array of strings which specifies the values we want to retrieve.
+     * @param {Boolean=} isJoinFiltered Whether or not this table is meant to be filtered using filterValues.
+     * @param {String=} filterColumnId If this table is filtered, this is the column where the filter values should be found.
+     * @param {Array} filterValues An array of strings which specifies the values we want to retrieve.
      * For example, if an ID column was the filter column, this would be a collection of IDs to retrieve.
      *
      * @param {Function} dataCallbackFn
      */
-    constructor (tableInfo, incrementValue = '', isJoinFiltered, filterColumnId, filterValues, dataCallbackFn) {
+    constructor (tableInfo, incrementValue = '', isJoinFiltered = false, filterColumnId = '', filterValues = [], dataCallbackFn) {
 
         this.tableInfo = tableInfo;
 

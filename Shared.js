@@ -170,8 +170,8 @@ class Shared {
             tableAndIncremntValue.tableInfo,
             tableAndIncremntValue.incrementValue,
             isJoinFiltered,
-            tableAndIncremntValue.filterColumnId || '', // better define default value at class level
-            tableAndIncremntValue.filterValues || [], // better define default value at class level
+            tableAndIncremntValue.filterColumnId,
+            tableAndIncremntValue.filterValues,
             this.privateApiObj._tableDataCallback
         );
 
@@ -213,7 +213,7 @@ class Shared {
      * @param {Array} types
      * @returns {Undefined}
      */
-    _headersCallback (fieldNames, types) {
+    _headersCallback (fieldNames, types) { // eslint-disable-line no-unused-vars
         this.tableauApiObj.abortWithError('tableau.headersCallback has been deprecated in version 2.0.0');
     }
 
@@ -225,7 +225,7 @@ class Shared {
      * @param {*} moreData
      * @returns {Undefined}
      */
-    _dataCallback (data, lastRecordToken, moreData) {
+    _dataCallback (data, lastRecordToken, moreData = null) { // eslint-disable-line no-unused-vars
         this.tableauApiObj.abortWithError('tableau.dataCallback has been deprecated in version 2.0.0');
     }
 
