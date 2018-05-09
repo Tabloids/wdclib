@@ -135,13 +135,23 @@ class SimulatorDispatcher {
 
         let messagePayload = this._buildMessagePayload(msgName, msgData, this._packagePropertyValues());
 
-        // Check first to see if we have a messageHandler defined to post the message to
-        // ( will use destructuring asap to validate this - Jax)
-        if (typeof this.globalObj.webkit != 'undefined' &&
-            typeof this.globalObj.webkit.messageHandlers != 'undefined' &&
-            typeof this.globalObj.webkit.messageHandlers.wdcHandler != 'undefined') {
+        let wdcHandler;
 
-            this.globalObj.webkit.messageHandlers.wdcHandler.postMessage(messagePayload);
+        try {
+            // try to use webkit.messageHandlers but don't fail since we have a fallback
+            wdcHandler = this.globalObj.webkit.messageHandlers.wdcHandler;
+
+        } catch (e) {
+
+            // wdcHandler not found on webkit.messageHandlers to post messagePayload
+            // we might be on the simulator
+
+        }
+
+        // Check first to see if we have a wdcHandler defined on messageHandlers to post the message to
+        if (wdcHandler) {
+
+            wdcHandler.postMessage(messagePayload);
 
         } else if (!this._sourceWindow) {
 

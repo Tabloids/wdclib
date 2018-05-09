@@ -1,7 +1,7 @@
-/* globals require */
+import * as Cookies from 'cookies-js';
+
 const APPROVED_ORIGINS_KEY = 'wdc_approved_origins';
 const SEPARATOR = ',';
-let Cookies = require('cookies-js');
 
 /**
  * @returns {*}

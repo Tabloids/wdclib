@@ -142,7 +142,9 @@ class NativeDispatcher {
     _schemaCallback (schema, standardConnections = []) {
 
         // Check to make sure we are using a version of desktop which has the WDCBridge_Api_schemaCallbackEx defined
-        if (!!this.nativeApiRootObj.WDCBridge_Api_schemaCallbackEx) {
+        let schemaCallbackExAvailable = !!this.nativeApiRootObj.WDCBridge_Api_schemaCallbackEx;
+
+        if (schemaCallbackExAvailable) {
 
             // Providing standardConnections is optional but we can't pass undefined back because Qt will choke
             this.nativeApiRootObj.WDCBridge_Api_schemaCallbackEx.api(schema, standardConnections);
@@ -170,7 +172,9 @@ class NativeDispatcher {
     _reportProgress (progress) {
 
         // Report progress was added in 2.1 so it may not be available if Tableau only knows 2.0
-        if (!!this.nativeApiRootObj.WDCBridge_Api_reportProgress) {
+        let reportProgressAvailable = !!this.nativeApiRootObj.WDCBridge_Api_reportProgress;
+
+        if (reportProgressAvailable) {
 
             this.nativeApiRootObj.WDCBridge_Api_reportProgress.api(progress);
 
