@@ -15,5 +15,25 @@ export default {
     output: {
         path: resolve('dist'),
         filename: 'bundle.js'
-    }
+    },
+    module: {
+        rules: [
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                exclude: [
+                    /node_modules/
+                ]
+            },
+            {
+                test: /\.js?$/,
+                loader: 'babel-loader',
+                include: [
+                    resolve('/')
+                ]
+            }
+        ]
+    },
+    plugins: [] // left to be extended by production build script
 };
