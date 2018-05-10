@@ -2,7 +2,7 @@ import { version as BUILD_NUMBER } from '../package.json';
 export let WDC_LIB_PREFIX = 'tableauwdc-';
 
 /**
- * Where is this class used? couldn't find anywhere
+ *
  */
 export class VersionNumber {
     /**
@@ -26,7 +26,7 @@ export class VersionNumber {
      * @returns {String}
      */
     toString () {
-        return `${this.major}${this.minor}.${this.patch}`;
+        return `${this.major}.${this.minor}.${this.patch}`;
     }
 
     /**

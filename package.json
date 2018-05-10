@@ -6,7 +6,7 @@
     "build": "webpack --progress --profile --colors",
     "build-w": "webpack --progress --profile --colors --watch",
     "build_min": "webpack --config webpack-production.config.babel.js --progress --profile --colors",
-    "make_version": "node ./make_version.js"
+    "make_version": "npx babel-node make_version"
   },
   "main": "tableauwdc.js",
   "private": true,
