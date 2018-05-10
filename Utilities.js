@@ -1,4 +1,5 @@
 /**
+ * WARNIG - copies are BY REFERENCE
  *
  * @param {Object} src Source Object
  * @param {Object} dest Target Object

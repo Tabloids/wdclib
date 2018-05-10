@@ -1,5 +1,5 @@
 /** This file lists all of the enums which should available for the WDC */
-const ALL_ENUMS = {
+export const ENUMS_DICTIONARY = {
     phaseEnum: {
         interactivePhase: 'interactive',
         authPhase: 'auth',
@@ -91,12 +91,13 @@ const ALL_ENUMS = {
 
 /**
  * Applies the enums as properties of the target object
+ * this is a mixin ( will overwrite existing properties)
  *
  * @param {Object} target
  * @returns {Undefined}
  */
 export function applyEnums (target) {
-    for (let key in ALL_ENUMS) {
-        target[key] = ALL_ENUMS[key];
+    for (let key in ENUMS_DICTIONARY) {
+        target[key] = ENUMS_DICTIONARY[key];
     }
 }

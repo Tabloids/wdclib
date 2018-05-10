@@ -42,24 +42,30 @@ class Table {
      *
      * @param {Array} data - Either an array of arrays or an array of objects which represent the individual rows of data to append to this table
      *
-     * @returns {Undefined}
+     * @returns {Boolean}
      */
     _appendRows (data) {
+        // note: add boolean return for testing purpose
+
         // Do some quick validation that this data is the format we expect
+        // is this validation enought? shouldn't we throw an error? (Jax)
         if (!data) {
             console.warn('rows data is null or undefined');
 
-            return;
+            return false;
         }
 
         if (!Array.isArray(data)) {
             // Log a warning because the data is not an array like we expected
+            // is this validation enought? shouldn't we throw an error? (Jax)
             console.warn('Table.appendRows must take an array of arrays or array of objects');
-            return;
+            return false;
         }
 
         // Call back with the rows for this table
         this._dataCallbackFn(this.tableInfo.id, data);
+
+        return true;
     }
 
 }

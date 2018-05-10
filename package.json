@@ -6,7 +6,10 @@
     "build": "webpack --progress --profile --colors",
     "build-w": "webpack --progress --profile --colors --watch",
     "build_min": "webpack --config webpack-production.config.babel.js --progress --profile --colors",
-    "make_version": "npx babel-node make_version"
+    "make_version": "npx babel-node make_version",
+    "test": "jest --coverage",
+    "test-w": "jest --coverage --watch",
+    "test-w-nocov": "jest --watch"
   },
   "engines": {
     "node": ">=6.9.2",
@@ -14,6 +17,34 @@
   },
   "main": "tableauwdc.js",
   "private": true,
+  "jest": {
+    "verbose": true,
+    "testRegex": "(/.*|(\\.|/))test\\.js?$",
+    "collectCoverageFrom": [
+      "**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/dist/",
+      "/versions/",
+      "/coverage/",
+      "/node_modules/",
+      "/.git/"
+    ],
+    "testPathIgnorePatterns":[
+      "/dist/",
+      "/versions/",
+      "/node_modules/",
+      "/coverage/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    }
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
