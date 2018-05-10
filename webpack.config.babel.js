@@ -11,7 +11,7 @@ console.log(`Building Version: ${BUILD_NUMBER}`);
 
 export default {
     devtool: 'cheap-module-inline-source-map',
-    entry: './index',
+    entry: ['babel-polyfill', './index'],
     output: {
         path: resolve('dist'),
         filename: 'bundle.js'

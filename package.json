@@ -8,6 +8,10 @@
     "build_min": "webpack --config webpack-production.config.babel.js --progress --profile --colors",
     "make_version": "npx babel-node make_version"
   },
+  "engines": {
+    "node": ">=6.9.2",
+    "npm": ">=5.2.0"
+  },
   "main": "tableauwdc.js",
   "private": true,
   "devDependencies": {
@@ -42,8 +46,7 @@
     "fs-extra": "^0.30.0",
     "json-loader": "^0.5.4",
     "jsuri": "^1.3.1",
-    "qwebchannel": "^5.5.0",
-    "string.prototype.endswith": "^0.2.0"
+    "qwebchannel": "^5.5.0"
   },
   "repository": {
     "type": "git",

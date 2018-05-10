@@ -12,7 +12,7 @@ import ptStringsMap from './resources/Shim_lib_resources_pt-BR.json';
 import zhStringsMap from './resources/Shim_lib_resources_zh-CN.json';
 
 // Required for IE & Edge which don't support endsWith
-require('String.prototype.endsWith'); // @todo review this
+// require('String.prototype.endsWith'); // now using babel-polyfill
 
 const BUILD_NUMBER = getBuildNumber();
 
