@@ -31,7 +31,7 @@ class NativeDispatcher {
             abortWithError: this._abortWithError.bind(this),
             addCrossOriginException: this._addCrossOriginException.bind(this),
             log: this._log.bind(this),
-            psubmit: this._submit.bind(this),
+            psubmit: this._submit.bind(this), // is this a typo kept for compatibility? if so, can we use an alias for compatibility and use a consistent name for the property?
             reportProgress: this._reportProgress.bind(this)
         };
 

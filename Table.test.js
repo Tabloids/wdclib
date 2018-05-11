@@ -1,8 +1,9 @@
 /* eslint-env node, mocha, jest */
 import Table from './Table';
 
-let consoleLog = console.log; // use if required for debugging
-let consoleWarn = console.warn; // use if required for debugging
+// use if required for debugging
+let consoleLog = console.log; // eslint-disable-line no-unused-vars
+let consoleWarn = console.warn; // eslint-disable-line no-unused-vars
 console.log = jest.fn();
 console.warn = jest.fn();
 

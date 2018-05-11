@@ -1,7 +1,8 @@
 /* eslint-env node, mocha, jest */
 import * as ApprovedOrigins from './ApprovedOrigins';
 
-let consoleLog = console.log; // use if required for debugging
+// use if required for debugging
+let consoleLog = console.log; // eslint-disable-line no-unused-vars
 console.log = jest.fn();
 
 describe('UNIT - ApprovedOrigins', () => {

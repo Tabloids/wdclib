@@ -1,6 +1,6 @@
 {
   "name": "@tabloids/wdclib",
-  "version": "2.4.0",
+  "version": "2.4.0-beta.1",
   "description": "Required Library to bridge javascript with Tableau. Use the scripts below to create the combined shim library. i.e. npm run-script build_and_copy",
   "scripts": {
     "build": "webpack --progress --profile --colors",
@@ -30,7 +30,7 @@
       "/node_modules/",
       "/.git/"
     ],
-    "testPathIgnorePatterns":[
+    "testPathIgnorePatterns": [
       "/dist/",
       "/versions/",
       "/node_modules/",

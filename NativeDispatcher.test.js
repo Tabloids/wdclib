@@ -9,7 +9,9 @@ const wdcBridgeApiPrefix = 'WDCBridge_Api';
 
 let publicInterfaceMethodsNames = ['abortForAuth', 'abortWithError', 'addCrossOriginException', 'log', 'psubmit', 'reportProgress'];
 let privateInterfaceMethodsNames = ['_initCallback', '_shutdownCallback', '_schemaCallback', '_tableDataCallback', '_dataDoneCallback'];
-let consoleLog = console.log; // use if required for debugging
+
+// use if required for debugging
+let consoleLog = console.log; // eslint-disable-line no-unused-vars
 console.log = jest.fn();
 
 beforeEach(() => {
