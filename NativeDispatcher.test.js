@@ -7,7 +7,7 @@ let nativeDispatcher;
 // set for better visual hint on tests
 const wdcBridgeApiPrefix = 'WDCBridge_Api';
 
-let publicInterfaceMethodsNames = ['abortForAuth', 'abortWithError', 'addCrossOriginException', 'log', 'psubmit', 'reportProgress'];
+let publicInterfaceMethodsNames = ['abortForAuth', 'abortWithError', 'addCrossOriginException', 'log', 'submit', 'reportProgress'];
 let privateInterfaceMethodsNames = ['_initCallback', '_shutdownCallback', '_schemaCallback', '_tableDataCallback', '_dataDoneCallback'];
 
 // use if required for debugging
