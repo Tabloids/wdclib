@@ -1,13 +1,15 @@
 import * as Cookies from 'cookies-js';
 
-const APPROVED_ORIGINS_KEY = 'wdc_approved_origins';
 const SEPARATOR = ',';
+export const APPROVED_ORIGINS_KEY = 'wdc_approved_origins';
+// alias of Cookies for testing ( and for future replacement? )
+export let CookiesLib = Cookies;
 
 /**
  * @returns {*}
  */
 function _getApprovedOriginsValue () {
-    let result = Cookies.get(APPROVED_ORIGINS_KEY);
+    let result = CookiesLib.get(APPROVED_ORIGINS_KEY);
 
     return result;
 }
@@ -24,7 +26,7 @@ function _saveApprovedOrigins (originArray) {
     console.log(`Saving approved origins  ${APPROVED_ORIGINS} `);
 
     // We could potentially make this a longer term cookie instead of just for the current session
-    let result = Cookies.set(APPROVED_ORIGINS_KEY, APPROVED_ORIGINS);
+    let result = CookiesLib.set(APPROVED_ORIGINS_KEY, APPROVED_ORIGINS);
 
     return result;
 }
@@ -32,7 +34,7 @@ function _saveApprovedOrigins (originArray) {
 /**
  * Adds an approved origins to the list already saved in a session cookie
  * @param {String} origin
- * @returns {Undefined}
+ * @returns {Object}
  */
 export function addApprovedOrigin (origin) {
 
@@ -41,7 +43,8 @@ export function addApprovedOrigin (origin) {
 
         origins.push(origin);
 
-        _saveApprovedOrigins(origins);
+        // pass along the output of the private function
+        return _saveApprovedOrigins(origins);
     }
 
 }
