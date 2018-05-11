@@ -1,10 +1,13 @@
 /* eslint-env node, mocha, jest */
 import * as ApprovedOrigins from './ApprovedOrigins';
 
+let consoleLog = console.log; // use if required for debugging
+console.log = jest.fn();
+
 describe('UNIT - ApprovedOrigins', () => {
 
     beforeEach(() => {
-        // COkkies Mock to make this a Unit Test instead of an integration test
+        // Cookies Mock to make this a Unit Test instead of an integration test
         // temp mock, will investigate on a better mocking for Cookies lib :(
         // (tried with standard jest mock, ridiculously failing)
 
@@ -22,11 +25,11 @@ describe('UNIT - ApprovedOrigins', () => {
 
     });
 
-    it('ApprovedOrigins.getApprovedOrigins should get an empty array if no value is set', () => {
+    it('getApprovedOrigins should get an empty array if no value is set', () => {
         expect(ApprovedOrigins.getApprovedOrigins()).toEqual([]);
     });
 
-    it('ApprovedOrigins.addApprovedOrigin should add an approved origin and ApprovedOrigins.getApprovedOrigins get it correctly', () => {
+    it('addApprovedOrigin should add an approved origin and ApprovedOrigins.getApprovedOrigins get it correctly', () => {
         let origin = 'http://tableau.com';
         expect(ApprovedOrigins.addApprovedOrigin(origin)).toBe(ApprovedOrigins.CookiesLib);
 
@@ -34,7 +37,7 @@ describe('UNIT - ApprovedOrigins', () => {
 
     });
 
-    it('ApprovedOrigins.addApprovedOrigin should add multiple values and get an array of the values', () => {
+    it('addApprovedOrigin should add multiple values and get an array of the values', () => {
         let origin1 = 'http://tableau.com';
         let origin2 = 'http://connectors.tableab.com';
         ApprovedOrigins.addApprovedOrigin(origin1);

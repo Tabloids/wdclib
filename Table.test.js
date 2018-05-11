@@ -1,6 +1,11 @@
 /* eslint-env node, mocha, jest */
 import Table from './Table';
 
+let consoleLog = console.log; // use if required for debugging
+let consoleWarn = console.warn; // use if required for debugging
+console.log = jest.fn();
+console.warn = jest.fn();
+
 describe('UNIT - Table', () => {
 
     it('Table should initialize with documented DEFAULTS', () => {
@@ -45,7 +50,7 @@ describe('UNIT - Table', () => {
 
     });
 
-    it('Table._appendRows should return boolean "execution success"', () => {
+    it('_appendRows should return boolean "execution success"', () => {
         let table = new Table({}, '', false, '', [], () => { });
 
         expect(table._appendRows()).toBe(false);
@@ -56,7 +61,7 @@ describe('UNIT - Table', () => {
 
     });
 
-    it('Table._appendRows should call _dataCallbackFn on input success"', () => {
+    it('_appendRows should call _dataCallbackFn on input success"', () => {
         let mockCallback = jest.fn();
 
         let table = new Table({}, '', false, '', [], mockCallback);
