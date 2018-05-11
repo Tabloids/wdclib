@@ -16,7 +16,6 @@
     "npm": ">=5.2.0"
   },
   "main": "tableauwdc.js",
-  "private": true,
   "jest": {
     "verbose": true,
     "testRegex": "(/.*|(\\.|/))test\\.js?$",
