@@ -47,7 +47,7 @@ try {
     console.log('\n\nMake version done -> ♥ \n\n');
 
 } catch (e) {
-    debugger;
+    debugger; // eslint-disable-line no-debugger
     console.error('Error encountered');
     console.error(e.toString());
 }

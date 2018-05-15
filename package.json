@@ -9,7 +9,10 @@
     "make_version": "npx babel-node make_version",
     "test": "jest --coverage",
     "test-w": "jest --coverage --watch",
-    "test-w-nocov": "jest --watch"
+    "test-w-nocov": "jest --watch",
+    "lint": "eslint **/*.js",
+    "lint-w": "esw -w --color *.js",
+    "nibble": "eslint-nibble ./"
   },
   "engines": {
     "node": ">=6.9.2",
