@@ -48,7 +48,7 @@ class Table {
         // note: add boolean return for testing purpose
 
         // Do some quick validation that this data is the format we expect
-        // is this validation enought? shouldn't we throw an error? (Jax)
+        // is this validation enough? shouldn't we throw an error? (Jax)
         if (!data) {
             console.warn('rows data is null or undefined');
 
@@ -57,7 +57,7 @@ class Table {
 
         if (!Array.isArray(data)) {
             // Log a warning because the data is not an array like we expected
-            // is this validation enought? shouldn't we throw an error? (Jax)
+            // is this validation enough? shouldn't we throw an error? (Jax)
             console.warn('Table.appendRows must take an array of arrays or array of objects');
             return false;
         }

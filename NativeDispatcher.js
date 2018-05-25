@@ -38,6 +38,7 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.abortforauth
      *
      * @param {String} msg
      * @returns {Undefined}
@@ -47,6 +48,7 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.abortwitherror
      *
      * @param {String} msg
      * @returns {Undefined}
@@ -56,6 +58,7 @@ class NativeDispatcher {
     }
 
     /**
+     * Missing documentation online, we need to add one
      *
      * @param {Array} destOriginList
      * @returns {Undefined}
@@ -65,8 +68,9 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.log
      *
-     * @param {*} msg
+     * @param {String} msg
      * @returns {Undefined}
      */
     _log (msg) {
@@ -74,6 +78,8 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.submit
+     *
      * @returns {Undefined}
      */
     _submit () {
@@ -106,6 +112,8 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.initcallback
+     *
      * @returns {Undefined}
      */
     _initCallback () {
@@ -120,6 +128,8 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.shutdowncallback
+     *
      * @returns {Undefined}
      */
     _shutdownCallback () {
@@ -134,9 +144,10 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.schemacallback
      *
-     * @param {*} schema
-     * @param {Array} standardConnections
+     * @param {Array<TableInfo>} schema  TableInfo @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
+     * @param {Array<StandardConnection>} standardConnections StandardConnection @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.standardconnection
      * @returns {Undefined}
      */
     _schemaCallback (schema, standardConnections = []) {
@@ -156,7 +167,7 @@ class NativeDispatcher {
 
     /**
      *
-     * @param {*} tableName
+     * @param {String} tableName
      * @param {*} data
      * @returns {Undefined}
      */
@@ -165,18 +176,19 @@ class NativeDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.reportProgress
      *
-     * @param {*} progress
+     * @param {String} progressMessage
      * @returns {Undefined}
      */
-    _reportProgress (progress) {
+    _reportProgress (progressMessage) {
 
         // Report progress was added in 2.1 so it may not be available if Tableau only knows 2.0
         let reportProgressAvailable = !!this.nativeApiRootObj.WDCBridge_Api_reportProgress;
 
         if (reportProgressAvailable) {
 
-            this.nativeApiRootObj.WDCBridge_Api_reportProgress.api(progress);
+            this.nativeApiRootObj.WDCBridge_Api_reportProgress.api(progressMessage);
 
         } else {
             console.log('reportProgress not available from this Tableau version');

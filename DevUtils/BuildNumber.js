@@ -31,13 +31,18 @@ export class VersionNumber {
 
     /**
      *
-     * @param {Object} other
+     * @param {{
+     *          major: (String),
+     *          minor: (String),
+     *          patch: (String)
+     *         }}  version Input version to compare against this.version
+     *
      * @returns {Number}
      */
-    compare (other) {
-        let majorDiff = this.major - other.major;
-        let minorDiff = this.minor - other.minor;
-        let fixDiff = this.patch - other.fix;
+    compare ({ major, minor, patch } = {}) {
+        let majorDiff = this.major - major;
+        let minorDiff = this.minor - minor;
+        let patchDiff = this.patch - patch;
 
         if (majorDiff !== 0) {
             return majorDiff;
@@ -47,8 +52,8 @@ export class VersionNumber {
             return minorDiff;
         }
 
-        if (fixDiff !== 0) {
-            return fixDiff;
+        if (patchDiff !== 0) {
+            return patchDiff;
         }
 
         return 0;
@@ -61,7 +66,8 @@ export class VersionNumber {
  * @returns {String}
  */
 export function getBuildNumber ({ showLog = false } = {}) {
-    // Grab the version number from the package json property ( one static source of truth )
+    // Single source of truth for version is package json
+    // which is stored at the top as BUILD_NUMBER constant
 
     if (!BUILD_NUMBER) {
         throw new Error(`Unable to retrieve version number from package.json`);

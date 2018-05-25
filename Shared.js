@@ -160,18 +160,18 @@ class Shared {
     _triggerDataGathering (tablesAndIncrementValues) {
 
         if (tablesAndIncrementValues.length !== 1) {
-            throw new Error(`Unexpected number of tables specified. Expected 1, actual  ${tablesAndIncrementValues.length.toString()}`);
+            throw new Error(`Unexpected number of tables specified. Expected 1, actual  ${tablesAndIncrementValues.length}`);
         }
 
-        let tableAndIncremntValue = tablesAndIncrementValues[0];
-        let isJoinFiltered = !!tableAndIncremntValue.filterColumnId;
+        let tableAndIncrementValue = tablesAndIncrementValues[0];
+        let isJoinFiltered = !!tableAndIncrementValue.filterColumnId;
 
         let table = new Table(
-            tableAndIncremntValue.tableInfo,
-            tableAndIncremntValue.incrementValue,
+            tableAndIncrementValue.tableInfo,
+            tableAndIncrementValue.incrementValue,
             isJoinFiltered,
-            tableAndIncremntValue.filterColumnId,
-            tableAndIncremntValue.filterValues,
+            tableAndIncrementValue.filterColumnId,
+            tableAndIncrementValue.filterValues,
             this.privateApiObj._tableDataCallback
         );
 

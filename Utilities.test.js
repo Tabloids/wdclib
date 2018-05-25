@@ -3,7 +3,7 @@ import { copyFunctions } from './Utilities';
 
 describe('UNIT - Utilities', () => {
 
-    it('copyFunctions to copy funtions from source to target', () => {
+    it('copyFunctions to copy functions from source to target', () => {
         let source = {
             a: function a () {
 

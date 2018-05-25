@@ -32,9 +32,9 @@ function _saveApprovedOrigins (originArray) {
 }
 
 /**
- * Adds an approved origins to the list already saved in a session cookie
+ * Adds an approved origin to the list already saved in a session cookie
  * @param {String} origin
- * @returns {Object}
+ * @returns {Object|Undefined}
  */
 export function addApprovedOrigin (origin) {
 

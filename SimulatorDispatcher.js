@@ -353,6 +353,7 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.abortforauth
      *
      * @param {String} msg
      * @returns {Undefined}
@@ -362,6 +363,7 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.abortwitherror
      *
      * @param {String} msg
      * @returns {Undefined}
@@ -371,6 +373,7 @@ class SimulatorDispatcher {
     }
 
     /**
+     * Missing documentation online, we need to add one
      *
      * @param {Array} destOriginList
      * @returns {Undefined}
@@ -387,6 +390,7 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.log
      *
      * @param {String} msg
      * @returns {Undefined}
@@ -396,15 +400,18 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.reportProgress
      *
-     * @param {String} msg
+     * @param {String} progressMessage
      * @returns {Undefined}
      */
-    _reportProgress (msg) {
-        this._sendMessage('reportProgress', { 'progressMsg': msg });
+    _reportProgress (progressMessage) {
+        this._sendMessage('reportProgress', { 'progressMsg': progressMessage });
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableau.submit
+     *
      * @returns {Undefined}
      */
     _submit () {
@@ -429,6 +436,8 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.initcallback
+     *
      * @returns {Undefined}
      */
     _initCallback () {
@@ -436,6 +445,8 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.shutdowncallback
+     *
      * @returns {Undefined}
      */
     _shutdownCallback () {
@@ -443,9 +454,10 @@ class SimulatorDispatcher {
     }
 
     /**
+     * @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.schemacallback
      *
-     * @param {*} schema
-     * @param {*} standardConnections
+     * @param {Array<TableInfo>} schema  TableInfo @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.tableinfo-1
+     * @param {Array<StandardConnection>} standardConnections StandardConnection @see http://tableau.github.io/webdataconnector/docs/api_ref.html#webdataconnectorapi.standardconnection
      * @returns {Undefined}
      */
     _schemaCallback (schema, standardConnections = []) {
