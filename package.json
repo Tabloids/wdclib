@@ -1,17 +1,77 @@
 {
-  "name": "wdclib",
+  "name": "@tabloids/wdclib",
+  "version": "2.4.0-beta.2.1",
   "description": "Required Library to bridge javascript with Tableau. Use the scripts below to create the combined shim library. i.e. npm run-script build_and_copy",
   "scripts": {
-    "build": "webpack --config webpack.config.js --progress --profile --colors",
-    "build_min": "webpack --config webpack-production.config.js --progress --profile --colors",
-    "make_version": "node ./make_version.js"
+    "build": "webpack --progress --profile --colors",
+    "build-w": "webpack --progress --profile --colors --watch",
+    "build_min": "webpack --config webpack-production.config.babel.js --progress --profile --colors",
+    "make_version": "npx babel-node make_version",
+    "test": "jest --coverage",
+    "test-w": "jest --coverage --watch",
+    "test-w-nocov": "jest --watch",
+    "lint": "eslint **/*.js",
+    "lint-w": "esw -w --color *.js",
+    "nibble": "eslint-nibble ./"
   },
-  "main": "ShimLibrary.js",
-  "private": true,
-  "author": "Tableau",
+  "engines": {
+    "node": ">=6.9.2",
+    "npm": ">=5.2.0"
+  },
+  "main": "tableauwdc.js",
+  "jest": {
+    "verbose": true,
+    "testRegex": "(/.*|(\\.|/))test\\.js?$",
+    "collectCoverageFrom": [
+      "**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/dist/",
+      "/versions/",
+      "/coverage/",
+      "/node_modules/",
+      "/.git/"
+    ],
+    "testPathIgnorePatterns": [
+      "/dist/",
+      "/versions/",
+      "/node_modules/",
+      "/coverage/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    }
+  },
   "devDependencies": {
-    "webpack": "^1.9.11",
-    "fs.extra": "^1.3.2"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.5.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-loader": "^1.9.0",
+    "eslint-nibble": "^4.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-watch": "^3.1.2",
+    "fs.extra": "^1.3.2",
+    "jest": "^20.0.4",
+    "jest-cli": "~23.6.0",
+    "webpack": "^3.5.5"
   },
   "dependencies": {
     "commander": "^2.9.0",
@@ -19,10 +79,24 @@
     "fs-extra": "^0.30.0",
     "json-loader": "^0.5.4",
     "jsuri": "^1.3.1",
-    "qwebchannel": "^5.5.0",
-    "string.prototype.endswith": "^0.2.0"
+    "qwebchannel": "^5.5.0"
   },
-  "config": {
-    "versionNumber": "2.3.0"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tabloids/wdclib.git"
+  },
+  "keywords": [
+    "Tableau",
+    "web",
+    "data",
+    "connectors",
+    "wdc",
+    "framework"
+  ],
+  "author": "Tableau Software",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tabloids/wdclib/issues"
+  },
+  "homepage": "https://github.com/Tabloids/wdclib#readme"
 }

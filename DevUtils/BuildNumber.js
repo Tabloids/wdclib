@@ -1,50 +1,81 @@
-var fs = require('fs');
-var path = require('path');
-const execSync = require('child_process').execSync;
+import { version as BUILD_NUMBER } from '../package.json';
+export let WDC_LIB_PREFIX = 'tableauwdc-';
 
-var WDC_LIB_PREFIX = "tableauwdc-";
+/**
+ *
+ */
+export class VersionNumber {
+    /**
+     *
+     * @param {String} versionString
+     */
+    constructor (versionString) {
+        let components = versionString.split('.');
 
-function VersionNumber(versionString) {
-  var components = versionString.split(".");
-  if (components.length < 3) {
-    console.log()
-    throw "Invalid number of components. versionString was '" + versionString + "'";
-  }
+        if (components.length < 3) {
+            console.log();
+            throw new Error(`Invalid number of components. versionString was  ${versionString} `);
+        }
 
-  this.major = parseInt(components[0]).toString();
-  this.minor = parseInt(components[1]).toString();
-  this.fix = parseInt(components[2]).toString();
+        this.major = parseInt(components[0]).toString();
+        this.minor = parseInt(components[1]).toString();
+        this.patch = parseInt(components[2]).toString();
+    }
+
+    /**
+     * @returns {String}
+     */
+    toString () {
+        return `${this.major}.${this.minor}.${this.patch}`;
+    }
+
+    /**
+     *
+     * @param {{
+     *          major: (String),
+     *          minor: (String),
+     *          patch: (String)
+     *         }}  version Input version to compare against this.version
+     *
+     * @returns {Number}
+     */
+    compare ({ major, minor, patch } = {}) {
+        let majorDiff = this.major - major;
+        let minorDiff = this.minor - minor;
+        let patchDiff = this.patch - patch;
+
+        if (majorDiff !== 0) {
+            return majorDiff;
+        }
+
+        if (minorDiff !== 0) {
+            return minorDiff;
+        }
+
+        if (patchDiff !== 0) {
+            return patchDiff;
+        }
+
+        return 0;
+    }
 }
 
-VersionNumber.prototype.toString = function() {
-  return this.major + "." + this.minor + "." + this.fix;
+/**
+ *
+ * @param {Object} config
+ * @returns {String}
+ */
+export function getBuildNumber ({ showLog = false } = {}) {
+    // Single source of truth for version is package json
+    // which is stored at the top as BUILD_NUMBER constant
+
+    if (!BUILD_NUMBER) {
+        throw new Error(`Unable to retrieve version number from package.json`);
+    }
+
+    if (showLog) {
+        console.log(`Found versionNumber in package.json: ${BUILD_NUMBER}`);
+    }
+
+    return BUILD_NUMBER;
 }
-
-VersionNumber.prototype.compare = function(other) {
-  var majorDiff = this.major - other.major;
-  var minorDiff = this.minor - other.minor;
-  var fixDiff = this.fix - other.fix;
-
-  if (majorDiff != 0) return majorDiff;
-  if (minorDiff != 0) return minorDiff;
-  if (fixDiff != 0) return fixDiff;
-
-  return 0;
-}
-
-function getBuildNumber() {
-  // Grab the version number from the environment variable
-  var versionNumber = process.env.npm_package_config_versionNumber;
-  if (versionNumber) {
-    console.log("Found versionNumber in environment variable: '" + versionNumber + "'");
-  } else {
-    versionNumber = process.argv.versionNumber;
-    console.log("Found versionNumber in argument: '" + versionNumber + "'");
-  }
-
-  return versionNumber;
-}
-
-module.exports.VersionNumber = VersionNumber;
-module.exports.WDC_LIB_PREFIX = WDC_LIB_PREFIX;
-module.exports.getBuildNumber = getBuildNumber;
