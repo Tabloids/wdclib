@@ -5,6 +5,7 @@ import Shared from './Shared';
 import NativeDispatcher from './NativeDispatcher';
 import SimulatorDispatcher from './SimulatorDispatcher';
 import { getBuildNumber } from './DevUtils/BuildNumber';
+import { ENUMS_DICTIONARY } from './Enums';
 
 let qwebchannel = require('qwebchannel');
 const BUILD_NUMBER = getBuildNumber();
@@ -129,4 +130,8 @@ export function init () {
     }
 }
 
+// named exports
+export { ENUMS_DICTIONARY };
+
+// default export
 export default init;
